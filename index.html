@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <title>Muestra Realidad Aumentada</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    
+    <script>
+      AFRAME.registerComponent('video-handler', {
+        schema: { target: { type: 'string' } },
+        init: function () {
+          const video = document.querySelector(this.data.target);
+          
+          // Reproduce el video cuando la cámara detecta la imagen
+          this.el.addEventListener('targetFound', () => {
+            video.play();
+          });
+          
+          // Pausa el video cuando la imagen sale de cuadro
+          this.el.addEventListener('targetLost', () => {
+            video.pause();
+          });
+        }
+      });
+    </script>
+  </head>
+  
+  <body>
+    <a-scene 
+      mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.0005; filterBeta: 0.001;" 
+      color-space="sRGB" 
+      renderer="colorManagement: true, physicallyCorrectLights" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="vid0" src="1_justicia.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+        <video id="vid1" src="2_legislatura.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+        <video id="vid2" src="3_gobierno.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+        <video id="vid3" src="4_capilla.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+        <video id="vid4" src="5_banco.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+        <video id="vid5" src="6_centro.mp4" playsinline webkit-playsinline muted loop crossorigin="anonymous"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" video-handler="target: #vid0">
+        <a-video src="#vid0" width="1.5" height="1.025" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1" video-handler="target: #vid1">
+        <a-video src="#vid1" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2" video-handler="target: #vid2">
+        <a-video src="#vid2" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3" video-handler="target: #vid3">
+        <a-video src="#vid3" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4" video-handler="target: #vid4">
+        <a-video src="#vid4" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 5" video-handler="target: #vid5">
+        <a-video src="#vid5" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 6" video-handler="target: #vid6">
+        <a-video src="#vid6" width="1.5" height="1.0625" position="0 0 0"></a-video>
+      </a-entity>
+
+    </a-scene>
+  </body>
+     <!-- Este código fue desarrollado por Eugenia Haag para Quanta Ingeniería -->
+</html>
